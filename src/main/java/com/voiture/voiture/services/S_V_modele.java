@@ -20,20 +20,21 @@ public class S_V_modele {
     public List<V_modele> rechercheMulticritere(V_modele modele) {
         String sql = "SELECT * FROM v_modele WHERE 1=1";
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-
+    
         if (modele.getModele() != null) {
-            sql += " AND modele = :modele";
-            parameters.addValue("modele", modele.getModele());
+            sql += " AND modele LIKE :modele";
+            parameters.addValue("modele", "%" + modele.getModele() + "%");
         }
-
+    
         if (modele.getMarque() != null) {
-            sql += " AND marque = :marque";
-            parameters.addValue("marque", modele.getMarque());
+            sql += " AND marque LIKE :marque";
+            parameters.addValue("marque", "%" + modele.getMarque() + "%");
         }
-
+    
         System.out.println(sql);
-
+    
         return JdbcTemplate.query(sql, parameters, new BeanPropertyRowMapper<>(V_modele.class));
     }
+    
 
 }
