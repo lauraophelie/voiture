@@ -2,9 +2,7 @@ package com.voiture.voiture.services;
 
 import java.util.List;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
 import org.springframework.stereotype.Service;
 import java.util.NoSuchElementException;
 
@@ -14,11 +12,10 @@ import com.voiture.voiture.repository.R_Modele;
 @Service
 public class S_Modele {
     private R_Modele r_Modele;    
-    private NamedParameterJdbcTemplate JdbcTemplate;
+    
 
-    public S_Modele(R_Modele r_Modele,NamedParameterJdbcTemplate JdbcTemplate) {
+    public S_Modele(R_Modele r_Modele) {
         this.r_Modele = r_Modele;
-        this.JdbcTemplate = JdbcTemplate;
     }
 
     public Modele save(Modele modele){

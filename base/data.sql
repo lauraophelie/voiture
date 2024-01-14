@@ -26,4 +26,5 @@ select * from marque;
 select * from type_energie;
 select * from boite_vitesse;
 select * from modele;
+select * from v_modele;
 

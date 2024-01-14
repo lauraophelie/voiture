@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.voiture.voiture.api.APIResponse;
 import com.voiture.voiture.modele.Modele;
-import com.voiture.voiture.modele.TypeEnergie;
 import com.voiture.voiture.services.S_Modele;
 
 @RestController
@@ -71,19 +70,6 @@ public class C_Modele {
         try {
             Modele te = s_Modele.findById(id);
             APIResponse api = new APIResponse(null, te);
-            return ResponseEntity.ok(api);
-        } catch (Exception e) {
-            e.printStackTrace();
-            APIResponse response = new APIResponse(e.getMessage(), null);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-        }
-    }
-    
-    @GetMapping("/searchmulti")
-    public ResponseEntity<APIResponse> multi(@RequestBody String nom,@RequestBody String marque){
-        try {
-            List<Modele> list = s_Modele.rechercheMulticritere(nom, marque);
-            APIResponse api = new APIResponse(null, list);
             return ResponseEntity.ok(api);
         } catch (Exception e) {
             e.printStackTrace();

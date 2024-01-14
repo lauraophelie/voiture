@@ -1,6 +1,9 @@
 package com.voiture.voiture.modele;
 
+import jakarta.persistence.Id;
+
 public class V_modele {
+    @Id
     int idmodele;
     String modele;
     int idmarque;
