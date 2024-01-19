@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,7 +30,7 @@ public class C_TypeEnergie {
         this.s_TypeEnergie = s_TypeEnergie;
     }
     
-    @GetMapping("/insert")
+    @PostMapping("/insert")
     public ResponseEntity<APIResponse> save(@RequestBody TypeEnergie typeEnergie){        
         try {
             TypeEnergie te = s_TypeEnergie.save(typeEnergie);
@@ -41,7 +43,7 @@ public class C_TypeEnergie {
         }
     }
 
-    @GetMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<APIResponse> update(@PathVariable int id,@RequestBody TypeEnergie TypeEnergie){
         try {
             TypeEnergie te = s_TypeEnergie.update(id, TypeEnergie);

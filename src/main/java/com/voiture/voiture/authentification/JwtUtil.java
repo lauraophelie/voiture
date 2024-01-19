@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class JwtUtil {
 
     private final String secret_key = "mysecretkey";
-    private long accessTokenValidity = 60;
+    private long accessTokenValidity = 60*60;
 
     private final JwtParser jwtParser;
 
@@ -28,13 +28,12 @@ public class JwtUtil {
         this.jwtParser = Jwts.parser().setSigningKey(secret_key);
     }
 
-    // creates a Claims object from user data and builds a jwt token with
-    // Jwts.builder() . The Claims object is used as the jwt body.
     public String createToken(Admin user) {
         Claims claims = Jwts.claims().setSubject(user.getEmail());
+        claims.put("id", user.getId());        
         claims.put("role", user.getAdmin());
         claims.put("firstName", user.getEmail());
-        claims.put("lastName", user.getPassword());
+        claims.put("password", user.getPassword());
         Date tokenCreateTime = new Date();
         Date tokenValidity = new Date(tokenCreateTime.getTime() + TimeUnit.MINUTES.toMillis(accessTokenValidity));
         return Jwts.builder()
@@ -44,7 +43,7 @@ public class JwtUtil {
                 .compact();
     }
 
-    private Claims parseJwtClaims(String token) {
+    public Claims parseJwtClaims(String token) {
         return jwtParser.parseClaimsJws(token).getBody();
     }
 
@@ -84,6 +83,11 @@ public class JwtUtil {
     public String getEmail(Claims claims) {
         return claims.getSubject();
     }
+
+    public static int getUserId(Claims claims) {
+        return claims.get("id", Integer.class);
+    }
+    
 
     private List<String> getRoles(Claims claims) {
         return (List<String>) claims.get("roles");

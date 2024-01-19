@@ -1,15 +1,6 @@
 package com.voiture.voiture.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
-
-import com.voiture.voiture.api.APIResponse;
-import com.voiture.voiture.authentification.JwtUtil;
-import com.voiture.voiture.modele.Marque;
-import com.voiture.voiture.services.S_Marque;
-
-import io.jsonwebtoken.Claims;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,26 +10,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.voiture.voiture.api.APIResponse;
+import com.voiture.voiture.modele.Lieu;
+import com.voiture.voiture.services.S_Lieu;
 
 @RestController
-@RequestMapping("/marque")
-public class C_Marque {
-    private final S_Marque s_marque;
-    private final JwtUtil jwtUtil;
-    
-    @Autowired
-    public C_Marque(S_Marque s_marque,JwtUtil jwtUtil) {        
-        this.s_marque = s_marque;
-        this.jwtUtil = jwtUtil;
+@RequestMapping("/lieu")
+public class C_Lieu {
+    private final S_Lieu s_Lieu;
+
+    @Autowired    
+    public C_Lieu(S_Lieu s_Lieu) {
+        this.s_Lieu = s_Lieu;
     }
-    
+
     @PostMapping("/insert")
-    public ResponseEntity<APIResponse> save(@RequestBody Marque marque){
+    public ResponseEntity<APIResponse> save(@RequestBody Lieu Lieu){
         try {
-            Marque te = s_marque.save(marque);
+            Lieu te = s_Lieu.save(Lieu);
             APIResponse api = new APIResponse(null, te);
             return ResponseEntity.ok(api);
         } catch (Exception e) {
@@ -49,9 +41,9 @@ public class C_Marque {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<APIResponse> update(@PathVariable int id,@RequestBody Marque marque){
+    public ResponseEntity<APIResponse> update(@PathVariable int id,@RequestBody Lieu Lieu){
         try {
-            Marque te = s_marque.update(id, marque);
+            Lieu te = s_Lieu.update(id, Lieu);
             APIResponse api = new APIResponse(null, te);
             return ResponseEntity.ok(api);
         } catch (Exception e) {
@@ -64,7 +56,7 @@ public class C_Marque {
     @GetMapping("/findAll")
     public ResponseEntity<APIResponse> findAll(){
         try {
-            List<Marque> te = s_marque.findAll();
+            List<Lieu> te = s_Lieu.findAll();
             APIResponse api = new APIResponse(null, te);
             return ResponseEntity.ok(api);
         } catch (Exception e) {
@@ -74,16 +66,10 @@ public class C_Marque {
         }
     }
 
-    @GetMapping("/findById")
-    public ResponseEntity<APIResponse> findById(@RequestHeader(name = "Authorization") String authorizationHeader){
+    @GetMapping("/findById/{id}")
+    public ResponseEntity<APIResponse> findById(@PathVariable int id){
         try {
-            int id = 0;
-            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-                String token = authorizationHeader.substring(7);
-                Claims claims = jwtUtil.parseJwtClaims(token);                
-                id = JwtUtil.getUserId(claims);
-            }
-            Marque te = s_marque.findById(id);
+            Lieu te = s_Lieu.findById(id);
             APIResponse api = new APIResponse(null, te);
             return ResponseEntity.ok(api);
         } catch (Exception e) {
@@ -93,5 +79,5 @@ public class C_Marque {
         }
     }
 
-
+    
 }

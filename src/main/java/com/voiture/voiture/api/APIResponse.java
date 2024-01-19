@@ -13,6 +13,10 @@ public class APIResponse {
 
     Object data;
 
+    public APIResponse(String error) {
+        this.error = error;
+    }
+
     public Object getData() {
         return data;
     }

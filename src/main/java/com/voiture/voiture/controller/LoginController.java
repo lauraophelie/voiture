@@ -11,7 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +19,7 @@ import com.voiture.voiture.modele.Admin;
 import com.voiture.voiture.modele.request.LoginReq;
 import com.voiture.voiture.modele.response.ErrorRes;
 import com.voiture.voiture.modele.response.LoginRes;
+import com.voiture.voiture.repository.R_Admin;
 
 import jakarta.servlet.http.*;
 
@@ -29,10 +29,12 @@ public class LoginController {
     private final AuthenticationManager authenticationManager;
 
     private JwtUtil jwtUtil;
+    private final R_Admin r_Admin;
 
-    public LoginController(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+    public LoginController(AuthenticationManager authenticationManager, JwtUtil jwtUtil,R_Admin r_Admin) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
+        this.r_Admin = r_Admin;
     }
 
     @GetMapping("/")
@@ -48,7 +50,7 @@ public class LoginController {
                     .authenticate(new UsernamePasswordAuthenticationToken(loginReq.getEmail(),
                             loginReq.getPassword()));
             String email = authentication.getName();
-            Admin user = new Admin(email, "");
+            Admin user = r_Admin.findByEmail(email);
             user.setAdmin(((List<? extends GrantedAuthority>)authentication.getAuthorities()).get(0).getAuthority());
             String token = jwtUtil.createToken(user);
             LoginRes loginRes = new LoginRes(email, token);

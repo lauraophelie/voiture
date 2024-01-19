@@ -42,14 +42,16 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         try {
             String accessToken = jwtUtil.resolveToken(request);
             if (accessToken == null) {
-                filterChain.doFilter(request, response);
+                filterChain.doFilter(request, response);    
                 return;
             }
             System.out.println("token : " + accessToken);
             Claims claims = jwtUtil.resolveClaims(request);
             if (claims != null & jwtUtil.validateClaims(claims)) {
                 String email = claims.getSubject();
+                int id = JwtUtil.getUserId(claims);
                 System.out.println("email : " + email);
+                System.out.println("id mety: " + id);
                 List<GrantedAuthority> roles = new ArrayList<>();
                 roles.add(new SimpleGrantedAuthority("ROLE_"+claims.get("role").toString()));
                 Authentication authentication = new UsernamePasswordAuthenticationToken(email, "", roles);
