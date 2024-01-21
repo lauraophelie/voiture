@@ -74,15 +74,9 @@ public class C_Marque {
         }
     }
 
-    @GetMapping("/findById")
-    public ResponseEntity<APIResponse> findById(@RequestHeader(name = "Authorization") String authorizationHeader){
+    @GetMapping("/findById/{id}")
+    public ResponseEntity<APIResponse> findById(@PathVariable int id){
         try {
-            int id = 0;
-            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-                String token = authorizationHeader.substring(7);
-                Claims claims = jwtUtil.parseJwtClaims(token);                
-                id = JwtUtil.getUserId(claims);
-            }
             Marque te = s_marque.findById(id);
             APIResponse api = new APIResponse(null, te);
             return ResponseEntity.ok(api);
