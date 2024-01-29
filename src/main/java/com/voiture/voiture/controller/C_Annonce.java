@@ -3,7 +3,6 @@ package com.voiture.voiture.controller;
 import java.sql.Timestamp;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +34,6 @@ public class C_Annonce {
     private final JwtUtil jwtUtil;
     private final S_V_Annonce s_V_Annonce;
 
-    @Autowired
     public C_Annonce(S_Annonce s_Annonce,JwtUtil jwtUtil,S_FavoriAnnonce s_FavoriAnnonce,S_V_Annonce s_V_Annonce) {
         this.s_Annonce = s_Annonce;
         this.jwtUtil = jwtUtil;

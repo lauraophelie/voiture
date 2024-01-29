@@ -44,7 +44,7 @@ public class C_Modele {
     @PutMapping("/update/{id}")
     public ResponseEntity<APIResponse> update(@PathVariable int id,@RequestBody Modele Modele){
         try {
-            Modele te = s_Modele.save(Modele);
+            Modele te = s_Modele.update(id,Modele);
             APIResponse api = new APIResponse(null, te);
             return ResponseEntity.ok(api);
         } catch (Exception e) {
