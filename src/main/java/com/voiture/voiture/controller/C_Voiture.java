@@ -2,6 +2,7 @@ package com.voiture.voiture.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.voiture.voiture.services.S_Voiture;
 
 @RestController
 @RequestMapping("/voiture")
+@CrossOrigin(origins = "*")
 public class C_Voiture {
     private final S_Voiture service;
     private final JwtUtil jwtUtil;

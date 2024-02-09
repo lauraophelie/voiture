@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,7 @@ import io.jsonwebtoken.Claims;
 
 @RestController
 @RequestMapping("/annonce")
+@CrossOrigin(origins = "*")
 public class C_Annonce {
     private final S_Annonce s_Annonce;
     private final S_FavoriAnnonce s_FavoriAnnonce;
@@ -67,7 +69,7 @@ public class C_Annonce {
         }
     }
 
-    @GetMapping("/find_by_user")
+    @GetMapping("/find_by_user/{proprietaire}")
     public ResponseEntity<APIResponse> getByProprietaire(@PathVariable String proprietaire) {
         try {
             List<Annonce> liste = s_Annonce.findByProprietaire(proprietaire);
