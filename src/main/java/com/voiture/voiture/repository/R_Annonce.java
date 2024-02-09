@@ -17,7 +17,7 @@ public interface R_Annonce extends JpaRepository<Annonce,Integer>{
     List<Annonce> listAnnonceByEtat(@Param("etat") int etat);
 
 
-    @Query(value = "SELECT * FROM annonce WHERE proprietaire = :prorietaire", nativeQuery = true)
+    @Query(value = "SELECT * FROM annonce WHERE proprietaire = :proprietaire", nativeQuery = true)
     List<Annonce> getByProprietaire(@Param("proprietaire") String proprietaire);
     
     @Query(value = "SELECT COUNT(*) FROM Annonce a")
