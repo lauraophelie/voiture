@@ -29,6 +29,10 @@ public class S_Annonce {
         return r_Annonce.findAll();
     }
 
+    public List<Annonce> findByProprietaire(String proprietaire) {
+        return r_Annonce.getByProprietaire(proprietaire);
+    }
+
     public Annonce updatestatus(int idannonce,int status){
         return this.r_Annonce.findById(idannonce).map(
             newAnnonce ->{

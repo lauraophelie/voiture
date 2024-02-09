@@ -67,6 +67,20 @@ public class C_Annonce {
         }
     }
 
+    @GetMapping("/find_by_user")
+    public ResponseEntity<APIResponse> getByProprietaire(@PathVariable String proprietaire) {
+        try {
+            List<Annonce> liste = s_Annonce.findByProprietaire(proprietaire);
+
+            APIResponse api = new APIResponse(null, liste);
+            return ResponseEntity.ok(api);
+        } catch (Exception e) {
+            e.printStackTrace();
+            APIResponse response = new APIResponse(e.getMessage(), null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+
     @GetMapping("/liste_annonce")
     public ResponseEntity<APIResponse> findAll(){
         try {
