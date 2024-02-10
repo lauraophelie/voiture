@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @RequestMapping("/typeenergie")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class C_TypeEnergie {
     private final S_TypeEnergie s_TypeEnergie;
 

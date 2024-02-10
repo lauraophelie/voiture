@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @RequestMapping("/marque")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class C_Marque {
     private final S_Marque s_marque;
     private final JwtUtil jwtUtil;

@@ -25,7 +25,7 @@ import jakarta.servlet.http.*;
 
 @Controller
 @RequestMapping("/rest/auth")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class LoginController {
     private final AuthenticationManager authenticationManager;
 

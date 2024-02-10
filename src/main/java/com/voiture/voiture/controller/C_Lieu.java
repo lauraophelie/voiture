@@ -20,7 +20,7 @@ import com.voiture.voiture.services.S_Lieu;
 
 @RestController
 @RequestMapping("/lieu")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class C_Lieu {
     private final S_Lieu s_Lieu;
 

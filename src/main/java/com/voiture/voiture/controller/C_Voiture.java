@@ -1,37 +1,35 @@
 package com.voiture.voiture.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.voiture.voiture.api.APIResponse;
-import com.voiture.voiture.modele.V_modele;
-import com.voiture.voiture.services.S_V_modele;
+import com.voiture.voiture.authentification.JwtUtil;
+import com.voiture.voiture.modele.Voiture;
+import com.voiture.voiture.services.S_Voiture;
 
 @RestController
-@RequestMapping("/v_modele")
+@RequestMapping("/voiture")
 @CrossOrigin(origins = "*")
-public class C_v_modele {
-    private final S_V_modele s_V_modele;
+public class C_Voiture {
+    private final S_Voiture service;
+    private final JwtUtil jwtUtil;
 
-    @Autowired
-    public C_v_modele(S_V_modele s_V_modele) {
-        this.s_V_modele = s_V_modele;
+    public C_Voiture(S_Voiture service, JwtUtil jwtUtil) {
+        this.service = service;
+        this.jwtUtil = jwtUtil;
     }
 
-    @GetMapping("/searchmulti")
-    public ResponseEntity<APIResponse> multi(@RequestBody V_modele modele){
-        System.out.println("ohhh");
+    @PostMapping("/save")
+    public ResponseEntity<APIResponse> save(@RequestBody Voiture voiture) {
         try {
-            List<V_modele> list = s_V_modele.rechercheMulticritere(modele);
-            APIResponse api = new APIResponse(null, list);
+            Voiture v = service.save(voiture);
+            APIResponse api = new APIResponse(null, v);
             return ResponseEntity.ok(api);
         } catch (Exception e) {
             e.printStackTrace();
@@ -39,5 +37,4 @@ public class C_v_modele {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
-    
 }

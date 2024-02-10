@@ -3,7 +3,6 @@ package com.voiture.voiture.controller;
 import java.sql.Timestamp;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,14 +29,13 @@ import io.jsonwebtoken.Claims;
 
 @RestController
 @RequestMapping("/annonce")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class C_Annonce {
     private final S_Annonce s_Annonce;
     private final S_FavoriAnnonce s_FavoriAnnonce;
     private final JwtUtil jwtUtil;
     private final S_V_Annonce s_V_Annonce;
 
-    @Autowired
     public C_Annonce(S_Annonce s_Annonce,JwtUtil jwtUtil,S_FavoriAnnonce s_FavoriAnnonce,S_V_Annonce s_V_Annonce) {
         this.s_Annonce = s_Annonce;
         this.jwtUtil = jwtUtil;
@@ -63,6 +61,20 @@ public class C_Annonce {
         try {
             FavoriAnnonce te = s_FavoriAnnonce.save(favoriAnnonce);
             APIResponse api = new APIResponse(null,te);
+            return ResponseEntity.ok(api);
+        } catch (Exception e) {
+            e.printStackTrace();
+            APIResponse response = new APIResponse(e.getMessage(), null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+
+    @GetMapping("/find_by_user/{proprietaire}")
+    public ResponseEntity<APIResponse> getByProprietaire(@PathVariable String proprietaire) {
+        try {
+            List<Annonce> liste = s_Annonce.findByProprietaire(proprietaire);
+
+            APIResponse api = new APIResponse(null, liste);
             return ResponseEntity.ok(api);
         } catch (Exception e) {
             e.printStackTrace();
