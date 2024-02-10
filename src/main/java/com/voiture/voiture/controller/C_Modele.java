@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.voiture.voiture.api.APIResponse;
 import com.voiture.voiture.modele.CaracteristiqueModele;
 import com.voiture.voiture.modele.Modele;
+import com.voiture.voiture.services.S_CaracteristiqueModele;
 import com.voiture.voiture.services.S_Modele;
 
 @RestController
@@ -24,10 +25,12 @@ import com.voiture.voiture.services.S_Modele;
 @CrossOrigin(origins = "*")
 public class C_Modele {
     private final S_Modele s_Modele;
+    private final S_CaracteristiqueModele s_CaracteristiqueModele;
     
     @Autowired
-    public C_Modele(S_Modele s_Modele) {
+    public C_Modele(S_Modele s_Modele, S_CaracteristiqueModele s_CaracteristiqueModele) {
         this.s_Modele = s_Modele;
+        this.s_CaracteristiqueModele = s_CaracteristiqueModele;
     }
 
     @PostMapping("/insert")
@@ -98,7 +101,7 @@ public class C_Modele {
     @GetMapping("/findCaracteristique/{idModele}")
     public ResponseEntity<APIResponse> findCaracteristiqueModele(@PathVariable int idModele) {
         try {
-            List<CaracteristiqueModele> liste = s_Modele.findByIdModeles(idModele);
+            List<CaracteristiqueModele> liste = s_CaracteristiqueModele.findByIdModeles(idModele);
             APIResponse api = new APIResponse(null, liste);
             return ResponseEntity.ok(api);
         } catch (Exception e) {
