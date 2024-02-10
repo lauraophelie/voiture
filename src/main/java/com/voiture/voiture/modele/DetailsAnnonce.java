@@ -22,6 +22,11 @@ public class DetailsAnnonce {
     String image3;
     String image4;
     public DetailsAnnonce(int id, Annonce id_annonce, String image1, String image2, String image3, String image4) {
+    String image1;
+    String image2;
+    String image3;
+    String image4;  
+    public DetailsAnnonce(int id, Annonce id_annonce, String image1, String image2, String image3, String image4) {
         this.id = id;
         this.id_annonce = id_annonce;
         this.image1 = image1;
@@ -66,6 +71,6 @@ public class DetailsAnnonce {
     }
     public void setImage4(String image4) {
         this.image4 = image4;
-    }
+    } 
     
 }
