@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.voiture.voiture.api.APIResponse;
+import com.voiture.voiture.modele.CaracteristiqueModele;
 import com.voiture.voiture.modele.Modele;
 import com.voiture.voiture.services.S_Modele;
 
@@ -22,7 +23,6 @@ import com.voiture.voiture.services.S_Modele;
 @RequestMapping("/modele")
 @CrossOrigin(origins = "*")
 public class C_Modele {
-    
     private final S_Modele s_Modele;
     
     @Autowired
@@ -87,6 +87,19 @@ public class C_Modele {
         try {
             Modele te = s_Modele.findById(id);
             APIResponse api = new APIResponse(null, te);
+            return ResponseEntity.ok(api);
+        } catch (Exception e) {
+            e.printStackTrace();
+            APIResponse response = new APIResponse(e.getMessage(), null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+
+    @GetMapping("/findCaracteristique/{idModele}")
+    public ResponseEntity<APIResponse> findCaracteristiqueModele(@PathVariable int idModele) {
+        try {
+            List<CaracteristiqueModele> liste = s_Modele.findByIdModeles(idModele);
+            APIResponse api = new APIResponse(null, liste);
             return ResponseEntity.ok(api);
         } catch (Exception e) {
             e.printStackTrace();

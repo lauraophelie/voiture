@@ -21,6 +21,7 @@ public class Modele {
     @OneToOne
     @JoinColumn(name = "idmarque")
     Marque marque;   
+    
     @Transient
     List<CaracteristiqueModele> listecaracteristique;
     public Modele(int id, String nom, Marque marque,List<CaracteristiqueModele> listecaracteristique) {

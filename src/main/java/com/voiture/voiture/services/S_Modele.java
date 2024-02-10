@@ -2,10 +2,10 @@ package com.voiture.voiture.services;
 
 import java.util.List;
 
-
 import org.springframework.stereotype.Service;
 import java.util.NoSuchElementException;
 
+import com.voiture.voiture.modele.CaracteristiqueModele;
 import com.voiture.voiture.modele.Modele;
 import com.voiture.voiture.repository.R_Modele;
 
@@ -42,5 +42,9 @@ public class S_Modele {
     
     public List<Modele> findByMarque(int idMarque) {
         return r_Modele.findByMarque(idMarque);
+    }
+
+    public List<CaracteristiqueModele> findByIdModeles(int idModele) {
+        return r_Modele.findByIdModeles(idModele);
     }
 }

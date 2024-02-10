@@ -37,3 +37,8 @@ select * from boite_vitesse;
 select * from modele;
 select * from v_modele;
 
+INSERT INTO caracteristique_modele(id_modele, id_categorie, id_type_vitesse, id_energie) VALUES
+                                (1, 1, 1, 1),
+                                (1, 1, 2, 1),
+                                (1, 1, 3, 2);
+
