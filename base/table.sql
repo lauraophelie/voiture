@@ -90,10 +90,10 @@ CREATE TABLE annonce(
 CREATE TABLE details_annonce(
     id SERIAL PRIMARY KEY,
     id_annonce INT,
-    image1 BYTEA,
-    image2 BYTEA,
-    image3 BYTEA,
-    image4 BYTEA,
+    image1 TEXT,
+    image2 TEXT,
+    image3 TEXT,
+    image4 TEXT,
     FOREIGN KEY (id_annonce) REFERENCES annonce (id)
 );
 

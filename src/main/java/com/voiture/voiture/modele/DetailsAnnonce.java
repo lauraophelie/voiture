@@ -17,11 +17,11 @@ public class DetailsAnnonce {
     @OneToOne
     @JoinColumn(name = "id_annonce")
     Annonce id_annonce;
-    byte[] image1;
-    byte[] image2;
-    byte[] image3;
-    byte[] image4;
-    public DetailsAnnonce(int id, Annonce id_annonce, byte[] image1, byte[] image2, byte[] image3, byte[] image4) {
+    String image1;
+    String image2;
+    String image3;
+    String image4;
+    public DetailsAnnonce(int id, Annonce id_annonce, String image1, String image2, String image3, String image4) {
         this.id = id;
         this.id_annonce = id_annonce;
         this.image1 = image1;
@@ -43,29 +43,29 @@ public class DetailsAnnonce {
     public void setId_annonce(Annonce id_annonce) {
         this.id_annonce = id_annonce;
     }
-    public byte[] getImage1() {
+    public String getImage1() {
         return image1;
     }
-    public void setImage1(byte[] image1) {
+    public void setImage1(String image1) {
         this.image1 = image1;
     }
-    public byte[] getImage2() {
+    public String getImage2() {
         return image2;
     }
-    public void setImage2(byte[] image2) {
+    public void setImage2(String image2) {
         this.image2 = image2;
     }
-    public byte[] getImage3() {
+    public String getImage3() {
         return image3;
     }
-    public void setImage3(byte[] image3) {
+    public void setImage3(String image3) {
         this.image3 = image3;
     }
-    public byte[] getImage4() {
+    public String getImage4() {
         return image4;
     }
-    public void setImage4(byte[] image4) {
+    public void setImage4(String image4) {
         this.image4 = image4;
-    }
+    } 
     
 }
