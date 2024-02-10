@@ -23,7 +23,7 @@ public class C_DetailsAnnonce {
         this.service = service;
     }
 
-    @GetMapping("/findByAnnonce/{id}")
+    @GetMapping("/findByAnnonce/{idAnnonce}")
     public ResponseEntity<APIResponse> save(@PathVariable int idAnnonce) {
         try {
             DetailsAnnonce d = service.findByIdAnnonce(idAnnonce);
