@@ -69,6 +69,19 @@ public class C_Modele {
         }
     }
 
+    @GetMapping("/findByMarque/{idMarque}")
+    public ResponseEntity<APIResponse> findByMarque(@PathVariable int idMarque) {
+        try {
+            List<Modele> te = s_Modele.findByMarque(idMarque);
+            APIResponse api = new APIResponse(null, te);
+            return ResponseEntity.ok(api);
+        } catch (Exception e) {
+            e.printStackTrace();
+            APIResponse response = new APIResponse(e.getMessage(), null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+
     @GetMapping("/findById/{id}")
     public ResponseEntity<APIResponse> findById(@PathVariable int id){
         try {

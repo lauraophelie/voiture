@@ -40,4 +40,7 @@ public class S_Modele {
         return r_Modele.findById(id).orElseThrow(()-> new NoSuchElementException("modele introuvable : " + id));
     }    
     
+    public List<Modele> findByMarque(int idMarque) {
+        return r_Modele.findByMarque(idMarque);
+    }
 }
