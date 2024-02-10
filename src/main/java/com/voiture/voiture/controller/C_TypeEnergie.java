@@ -11,6 +11,7 @@ import com.voiture.voiture.services.S_TypeEnergie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @RequestMapping("/typeenergie")
-
+@CrossOrigin("*")
 public class C_TypeEnergie {
     private final S_TypeEnergie s_TypeEnergie;
 
