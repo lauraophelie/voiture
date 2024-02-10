@@ -16,4 +16,8 @@ public class S_DetailsAnnonce {
     public DetailsAnnonce save(DetailsAnnonce detailsAnnonce) {
         return repository.save(detailsAnnonce);
     }
+
+    public DetailsAnnonce findByIdAnnonce(int idAnnonce) {
+        return repository.findByIdAnnonce(idAnnonce);
+    }
 }
