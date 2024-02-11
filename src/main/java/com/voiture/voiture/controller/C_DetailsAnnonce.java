@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.voiture.voiture.api.APIResponse;
+import com.voiture.voiture.authentification.JwtUtil;
 import com.voiture.voiture.modele.DetailsAnnonce;
 import com.voiture.voiture.services.S_DetailsAnnonce;
 
@@ -19,9 +20,11 @@ import com.voiture.voiture.services.S_DetailsAnnonce;
 @CrossOrigin("*")
 public class C_DetailsAnnonce {
     private final S_DetailsAnnonce service;
+    private final JwtUtil jwtUtil;
 
-    public C_DetailsAnnonce(S_DetailsAnnonce service) {
+    public C_DetailsAnnonce(S_DetailsAnnonce service, JwtUtil jwtUtil) {
         this.service = service;
+        this.jwtUtil = jwtUtil;
     }
 
     @GetMapping("/findByAnnonce/{idAnnonce}")
